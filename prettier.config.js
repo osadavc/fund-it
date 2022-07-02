@@ -1,6 +1,7 @@
 module.exports = {
   singleQuote: false,
   semi: true,
+  plugins: [require("prettier-plugin-tailwindcss")],
   importOrder: [
     "^(next/(.*)$)|^(next$)",
     "<THIRD_PARTY_MODULES>",
