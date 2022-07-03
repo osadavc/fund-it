@@ -1,3 +1,5 @@
+import FundRaiser from "models/FundRaiser";
+import User from "models/User";
 import mongoose from "mongoose";
 
 const { MONGODB_URL } = process.env;
@@ -11,6 +13,9 @@ const dbConnect = async () => {
 
     await connection;
   }
+
+  User.init();
+  FundRaiser.init();
 
   return connection;
 };

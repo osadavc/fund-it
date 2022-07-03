@@ -36,5 +36,5 @@ const fundRaiserSchema = new mongoose.Schema<FundRaiserI>({
   },
 });
 
-export default (mongoose.models.User as mongoose.Model<FundRaiserI>) ||
+export default (mongoose.models.FundRaiser as mongoose.Model<FundRaiserI>) ||
   mongoose.model<FundRaiserI>("FundRaiser", fundRaiserSchema);

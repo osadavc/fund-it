@@ -28,7 +28,7 @@ const IntroSection = () => {
         their project the new reality. No fees, no hidden costs.
       </p>
 
-      <div className="mt-8 flex flex-col space-x-3 md:flex-row">
+      <div className="mt-8 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-3">
         <Button
           style={{
             fontWeight: 500,

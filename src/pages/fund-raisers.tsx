@@ -1,5 +1,11 @@
+import Navbar from "components/Home/Navbar";
+
 const FundRaisers = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 };
 
 export default FundRaisers;

@@ -1,22 +1,8 @@
-import {
-  GetServerSidePropsContext,
-  NextApiRequest,
-  NextApiResponse,
-  PreviewData,
-} from "next";
-
-import { JWT_SECRET } from "config";
-import Cookies from "cookies";
-import jwt from "jsonwebtoken";
-import { ParsedUrlQuery } from "querystring";
-
-export interface User {
-  id: string;
-  walletAddress: string;
-}
+import { NextApiRequest, NextApiResponse } from "next";
+import { getToken, JWT } from "next-auth/jwt";
 
 export interface NextApiRequestWithUser extends NextApiRequest {
-  user: User;
+  user: JWT;
 }
 
 export const onError = (
@@ -37,45 +23,15 @@ export const auth = async (
   res: NextApiResponse,
   next: Function
 ) => {
-  const cookies = new Cookies(req, res);
-  const accessToken = cookies.get("__fund_it_access_token__");
+  const token = await getToken({ req });
 
-  if (!accessToken) {
+  if (!token) {
     return res.status(401).json({
       statusCode: 401,
       message: "Unauthorized",
     });
   }
 
-  const payload = await jwt.verify(accessToken, JWT_SECRET);
-
-  if (!payload) {
-    return res.status(401).json({
-      status: 401,
-      error: "Unauthorized",
-    });
-  }
-
-  req.user = payload as User;
+  req.user = token;
   next();
-};
-
-export const getUser = async ({
-  req,
-  res,
-}: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => {
-  const cookies = new Cookies(req, res);
-  const accessToken = cookies.get("__fund_it_access_token__");
-
-  if (!accessToken) {
-    return null;
-  }
-
-  const payload: User = (await jwt.verify(accessToken, JWT_SECRET)) as User;
-
-  if (!payload) {
-    return null;
-  }
-
-  return payload;
 };
