@@ -1,7 +1,24 @@
 import { Button } from "@chakra-ui/react";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const isDashboard = router.pathname === "/dashboard";
+
+  const handleClick = () => {
+    if (session) {
+      return router.push("/dashboard");
+    }
+
+    signIn("google", {
+      callbackUrl: "/dashboard",
+    });
+  };
+
   return (
     <div className="mx-auto flex max-w-7xl items-center justify-between py-5 px-4">
       <Link href="/" passHref>
@@ -9,13 +26,30 @@ const Navbar = () => {
           Fund It
         </h1>
       </Link>
-      <Button
-        style={{
-          fontWeight: 500,
-        }}
-      >
-        Start A Fund Raiser
-      </Button>
+
+      {isDashboard ? (
+        <Button
+          style={{
+            fontWeight: 500,
+          }}
+          onClick={() => {
+            signOut({
+              callbackUrl: "/",
+            });
+          }}
+        >
+          Log Out
+        </Button>
+      ) : (
+        <Button
+          style={{
+            fontWeight: 500,
+          }}
+          onClick={handleClick}
+        >
+          Start A Fund Raiser
+        </Button>
+      )}
     </div>
   );
 };
