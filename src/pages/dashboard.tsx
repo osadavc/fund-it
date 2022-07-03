@@ -6,8 +6,9 @@ import dbConnect from "utils/dbConnect";
 import { NextPage } from "next";
 import VerifyWallet from "components/Dashboard/VerifyWallet";
 import { useEffect, useState } from "react";
-import { Tooltip } from "@chakra-ui/react";
+import { Button, Tooltip, useDisclosure } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
+import NewProjectDrawer from "components/Dashboard/NewProjectDrawer";
 
 interface DashboardProps {
   user: UserI;
@@ -15,6 +16,7 @@ interface DashboardProps {
 
 const Dashboard: NextPage<DashboardProps> = ({ user: serverUser }) => {
   const [user, setUser] = useState<UserI>(serverUser);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     setUser(serverUser);
@@ -37,10 +39,12 @@ const Dashboard: NextPage<DashboardProps> = ({ user: serverUser }) => {
                 </h4>
               </div>
 
+              <NewProjectDrawer isOpen={isOpen} onClose={onClose} />
+
               <Tooltip label="Create New Project">
-                <div className="cursor-pointer rounded-md bg-zinc-100 p-2 text-sm">
-                  <AddIcon />
-                </div>
+                <Button onClick={onOpen}>
+                  <AddIcon className="text-sm" />
+                </Button>
               </Tooltip>
             </div>
           </div>

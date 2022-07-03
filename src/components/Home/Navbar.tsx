@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="mx-auto flex items-center justify-between py-5 px-0 md:px-10">
+    <div className="mx-auto flex max-w-7xl items-center justify-between py-5 px-4 md:max-w-none md:px-10">
       <Link href="/" passHref>
         <h1 className="cursor-pointer select-none bg-gradient-to-r from-gray-700 via-gray-900 to-black bg-clip-text text-3xl font-bold text-transparent">
           Fund It

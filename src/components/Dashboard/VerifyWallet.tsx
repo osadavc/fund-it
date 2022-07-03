@@ -60,6 +60,8 @@ const VerifyWallet: FC<VerifyWalletProps> = ({ setUser }) => {
         }
       }
     });
+
+    ws.close();
   };
 
   return (
