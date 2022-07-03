@@ -1,12 +1,19 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import "../styles/globals.css";
 
+const theme = extendTheme({
+  fonts: {
+    heading: `'Inter', sans-serif`,
+    body: `'Inter', sans-serif`,
+  },
+});
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Head>
         <title>Fund It | Fund & Help New Projects To Go To Moon</title>
       </Head>
