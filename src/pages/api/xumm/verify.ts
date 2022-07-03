@@ -39,8 +39,8 @@ const handler = nc<NextApiRequestWithUser, NextApiResponse>({
 
     if (user?.xummUUID === uuid) {
       const data = await xumm.payload.get(user?.xummUUID!, true);
-      user!.walletAddress = data?.response.signer;
-      await user.save();
+      user!.walletAddress = data?.response.signer!;
+      await user?.save();
 
       return res
         .status(200)

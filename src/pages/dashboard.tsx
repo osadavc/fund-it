@@ -6,6 +6,8 @@ import dbConnect from "utils/dbConnect";
 import { NextPage } from "next";
 import VerifyWallet from "components/Dashboard/VerifyWallet";
 import { useEffect, useState } from "react";
+import { Tooltip } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 
 interface DashboardProps {
   user: UserI;
@@ -19,10 +21,31 @@ const Dashboard: NextPage<DashboardProps> = ({ user: serverUser }) => {
   }, [serverUser]);
 
   return (
-    <div className="mx-auto max-w-7xl px-4">
+    <div>
       <Navbar />
 
-      {!user.walletAddress && <VerifyWallet setUser={setUser} />}
+      <div className="mx-auto max-w-7xl px-4 pt-16">
+        {!user.walletAddress ? (
+          <VerifyWallet setUser={setUser} />
+        ) : (
+          <div>
+            <div className="flex items-center text-2xl">
+              <div className="flex-grow">
+                <h3 className="font-semibold">Fund Raisers</h3>
+                <h4 className="text-base capitalize">
+                  View and Manage all your fundraisers
+                </h4>
+              </div>
+
+              <Tooltip label="Create New Project">
+                <div className="cursor-pointer rounded-md bg-zinc-100 p-2 text-sm">
+                  <AddIcon />
+                </div>
+              </Tooltip>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -63,7 +63,7 @@ const VerifyWallet: FC<VerifyWalletProps> = ({ setUser }) => {
   };
 
   return (
-    <div className="mx-auto mt-10 rounded-md bg-zinc-50 py-8 px-2 text-center md:w-[70%]">
+    <div className="mx-auto mt-10 rounded-md bg-zinc-50 px-2 text-center md:w-[70%]">
       <h2 className="text-xl font-bold">Your XRP Wallet Is Not Verified</h2>
       <p className="mt-1">
         Please verify your XRP wallet to create a fund-raiser
