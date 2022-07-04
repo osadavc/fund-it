@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
 import { FundRaiserI } from "./FundRaiser";
 
-export interface UserI extends mongoose.Document {
-  googleId: number;
-  name: string;
-  email: string;
-  createdAt: Date;
-  walletAddress: string;
-  xummUUID: string;
-  fundRaisers: FundRaiserI[];
+export interface UserI {
+  _id?: string;
+  googleId?: number;
+  name?: string;
+  email?: string;
+  createdAt?: Date;
+  walletAddress?: string;
+  xummUUID?: string;
+  fundRaisers?: FundRaiserI[];
 }
 
 const userSchema = new mongoose.Schema<UserI>({

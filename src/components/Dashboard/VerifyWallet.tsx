@@ -1,12 +1,12 @@
 import { Button, useToast } from "@chakra-ui/react";
 import axios from "axios";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { XummPostPayloadResponse } from "xumm-sdk/dist/src/types";
 import { FC } from "react";
 import { UserI } from "models/User";
 
 interface VerifyWalletProps {
-  setUser: Dispatch<SetStateAction<UserI>>;
+  setUser: (user: UserI | null) => void;
 }
 
 const VerifyWallet: FC<VerifyWalletProps> = ({ setUser }) => {
@@ -35,13 +35,7 @@ const VerifyWallet: FC<VerifyWalletProps> = ({ setUser }) => {
           });
 
           if (response.success) {
-            setUser(
-              (prevUser) =>
-                ({
-                  ...prevUser,
-                  walletAddress: response.walletAddress as string,
-                } as any)
-            );
+            setUser(response);
 
             toast({
               status: "success",
@@ -57,15 +51,15 @@ const VerifyWallet: FC<VerifyWalletProps> = ({ setUser }) => {
             title: "Error",
             description: "Your wallet could not be verified",
           });
+        } finally {
+          ws.close();
         }
       }
     });
-
-    ws.close();
   };
 
   return (
-    <div className="mx-auto mt-10 rounded-md bg-zinc-50 px-2 text-center md:w-[70%]">
+    <div className="mx-auto mt-10 rounded-md bg-zinc-50 py-10 px-2 text-center md:w-[70%]">
       <h2 className="text-xl font-bold">Your XRP Wallet Is Not Verified</h2>
       <p className="mt-1">
         Please verify your XRP wallet to create a fund-raiser

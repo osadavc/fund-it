@@ -17,6 +17,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { FC, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import useStore from "store";
 import { useFileUpload } from "use-file-upload";
 
 interface NewProjectDrawer {
@@ -28,6 +29,8 @@ const NewProjectDrawer: FC<NewProjectDrawer> = ({ isOpen, onClose }) => {
   const btnRef = useRef();
   const { data: session } = useSession();
   const [file, selectFile] = useFileUpload();
+  const replaceUser = useStore((state) => state.replaceUser);
+  const user = useStore((state) => state.user);
 
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -47,13 +50,19 @@ const NewProjectDrawer: FC<NewProjectDrawer> = ({ isOpen, onClose }) => {
   const handleCreateProject = async (d: any) => {
     try {
       setLoading(true);
-      await axios.post("/api/fund-raiser", d);
+      const { data: response } = await axios.post("/api/fund-raiser", d);
+      replaceUser({
+        ...user,
+        fundRaisers: [...user?.fundRaisers!, response!],
+      });
+      onClose();
       toast({
         status: "success",
         title: "Success",
         description: "Project created successfully",
       });
     } catch (error) {
+      console.log(error);
       toast({
         status: "error",
         title: "Error",
@@ -161,6 +170,11 @@ const NewProjectDrawer: FC<NewProjectDrawer> = ({ isOpen, onClose }) => {
                 />
               </div>
             )}
+
+            <p className="mt-4">
+              User donated funds will be credited to the verified wallet
+              automatically, no fees will be taken
+            </p>
           </div>
         </DrawerBody>
 
