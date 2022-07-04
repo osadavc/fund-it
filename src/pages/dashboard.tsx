@@ -82,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
-  dbConnect();
+  await dbConnect();
 
   const user = await User.findOne({
     googleId: session?.id,

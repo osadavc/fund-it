@@ -9,6 +9,7 @@ export interface FundRaiserI {
   XRPGoal: number;
   XRPProgress: number;
   funders: {
+    _id: string;
     walletAddress: string;
     amount: number;
   }[];

@@ -32,7 +32,12 @@ const UserFundRaiser: FC<UserFundRaiser> = ({ fundRaiser }) => {
         <div>
           <h3 className="mb-2 text-xs">Progress: </h3>
           <Progress
-            value={(fundRaiser.XRPProgress ?? 0) / fundRaiser.XRPGoal}
+            value={parseInt(
+              (
+                ((fundRaiser.XRPProgress ?? 0) / fundRaiser.XRPGoal) *
+                100
+              ).toFixed(2)
+            )}
           />
         </div>
       </div>

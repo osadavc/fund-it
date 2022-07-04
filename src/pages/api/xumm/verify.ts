@@ -17,7 +17,7 @@ const handler = nc<NextApiRequestWithUser, NextApiResponse>({
 })
   .use(auth)
   .get(async (req, res) => {
-    dbConnect();
+    await dbConnect();
     const { uuid, ...payload } = (await xumm.payload.create(
       {
         TransactionType: "SignIn",
@@ -33,7 +33,7 @@ const handler = nc<NextApiRequestWithUser, NextApiResponse>({
   })
   .post(async (req, res) => {
     const { uuid } = req.body;
-    dbConnect();
+    await dbConnect();
 
     const user = await User.findOne({ googleId: req.user.sub });
 

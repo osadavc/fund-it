@@ -24,7 +24,7 @@ const handler = nc<NextApiRequestWithUser, NextApiResponse>({
         error: "Missing required fields",
       });
     }
-    dbConnect();
+    await dbConnect();
 
     const beneficiary = await User.findOne({
       googleId: req.user.sub,
