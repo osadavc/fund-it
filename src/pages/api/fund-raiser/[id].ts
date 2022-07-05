@@ -58,7 +58,7 @@ const handler = nc<NextApiRequestWithUser, NextApiResponse>({
               walletAddress: data?.response.signer!,
             }
           : funder
-      );
+      )!;
       fundRaisers!.XRPProgress += fundRaiser.amount!;
       await fundRaisers?.save();
 
