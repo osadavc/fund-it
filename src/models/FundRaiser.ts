@@ -9,9 +9,11 @@ export interface FundRaiserI {
   XRPGoal: number;
   XRPProgress: number;
   funders: {
-    _id: string;
-    walletAddress: string;
-    amount: number;
+    _id?: string;
+    walletAddress?: string;
+    amount?: number;
+    UUID?: string;
+    userKey?: string;
   }[];
   beneficiary: UserI;
 }
@@ -44,11 +46,19 @@ const fundRaiserSchema = new mongoose.Schema<FundRaiserI>({
     {
       walletAddress: {
         type: String,
-        required: true,
+        required: false,
       },
       amount: {
         type: Number,
-        required: true,
+        required: false,
+      },
+      UUID: {
+        type: String,
+        required: false,
+      },
+      userKey: {
+        type: String,
+        required: false,
       },
     },
   ],

@@ -3,8 +3,10 @@ import Head from "next/head";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import axios from "axios";
+import { nanoid } from "nanoid";
 
 import "../styles/globals.css";
+import { useEffect } from "react";
 
 axios.defaults.withCredentials = true;
 
@@ -19,6 +21,14 @@ const MyApp = ({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps) => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      localStorage.setItem("token", nanoid());
+    }
+  }, []);
+
   return (
     <SessionProvider session={session}>
       <ChakraProvider theme={theme}>

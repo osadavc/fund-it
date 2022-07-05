@@ -34,11 +34,12 @@ const handler = nc<NextApiRequestWithUser, NextApiResponse>({
       title,
       description,
       XRPGoal: xrpAmount,
+      XRPProgress: 0,
       image,
       beneficiary: beneficiary?._id,
     });
 
-    beneficiary?.fundRaisers.push(fundRaiser._id);
+    beneficiary?.fundRaisers!.push(fundRaiser._id.toString() as any);
     await beneficiary?.save();
 
     res.status(201).json(fundRaiser);
