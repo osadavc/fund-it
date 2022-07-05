@@ -1,3 +1,12 @@
-# Next JS + Tailwind + Prettier Starter Template 🎉
+# Fund It
 
-A Next JS Template Made For My Every Day Use 👌🏻
+The ultimate platform for people to showcase their projects and collect funds for them with XRP.
+
+> Made for XRPL Hackathon.
+
+# Screenshots
+
+![Home](/screenshots/home.png)
+![Dashboard](/screenshots/dashboard.png)
+![Fund-Raiser List](/screenshots/fund-raiser-list.png)
+![Donating Page](/screenshots/donation.png)
