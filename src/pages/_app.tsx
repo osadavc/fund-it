@@ -34,6 +34,7 @@ const MyApp = ({
       <ChakraProvider theme={theme}>
         <Head>
           <title>Fund It | Fund & Help New Projects To Go To Moon</title>
+          <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
         </Head>
         <Component {...pageProps} />
       </ChakraProvider>
